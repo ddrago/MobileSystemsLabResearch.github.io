@@ -69,14 +69,96 @@
         </button>
     </section>
 
-    <section id="team" class="min-h-screen bg-white py-12">
-        <!-- Team content here -->
+    <section id="team" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 animate-fade-in">
+                <h2 class="text-4xl md:text-5xl font-light text-slate-900 mb-6">
+                    Research Team
+                </h2>
+                <p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+                    Our diverse team of researchers and engineers brings together expertise
+                    from computer science, mathematics, and domain-specific applications.
+                </p>
+            </div>
+
+            <!-- Loading Placeholder (Optional) -->
+            <div id="loading" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Placeholder cards (optional) -->
+            </div>
+
+            <!-- Team Members Grid -->
+            <div id="team-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Team members will be inserted here by JavaScript -->
+            </div>
+        </div>
     </section>
 
     <script>
         function scrollToSection(id) {
             document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
         }
+    </script>
+
+    <script>
+        // Sample team data (replace with your actual data)
+        const teamMembers = [
+            {
+                id: 1,
+                name: "Dr. Jane Smith",
+                title: "Principal Investigator",
+                research_focus: "Neural networks, evolutionary algorithms, and their applications in healthcare.",
+                bio: "Dr. Smith leads our research group and has published over 50 papers in top-tier conferences.",
+                email: "jane.smith@example.com",
+                linkedin_url: "https://linkedin.com/in/janesmith",
+                google_scholar_url: "https://scholar.google.com/citations?user=123",
+                profile_image_url: "https://via.placeholder.com/150"
+            },
+            {
+                id: 2,
+                name: "Dr. John Doe",
+                title: "Senior Researcher",
+                research_focus: "Autonomous systems, robotics, and sustainable technology.",
+                bio: "Dr. Doe specializes in robotics and has developed several patented technologies.",
+                email: "john.doe@example.com",
+                linkedin_url: "https://linkedin.com/in/johndoe",
+                google_scholar_url: "https://scholar.google.com/citations?user=456",
+                profile_image_url: ""
+            },
+            // Add more members as needed
+        ];
+
+        // Function to render team members
+        function renderTeamMembers() {
+            const grid = document.getElementById('team-grid');
+            grid.innerHTML = teamMembers.map((member, index) => `
+                <div class="animate-fade-in animate-fade-in-delay-${index + 1}">
+                    <div class="group hover:shadow-xl transition-shadow duration-300 h-full bg-white rounded-lg overflow-hidden">
+                        <div class="p-6 text-center h-full flex flex-col">
+                            <div class="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden bg-gradient-to-br from-blue-100 to-slate-100">
+                                ${member.profile_image_url
+                                    ? `<img src="${member.profile_image_url}" alt="${member.name}" class="w-full h-full object-cover">`
+                                    : `<div class="w-full h-full flex items-center justify-center text-2xl font-light text-slate-600">${member.name.split(' ').map(n => n[0]).join('')}</div>`}
+                            </div>
+                            <h3 class="text-xl font-medium text-slate-900 mb-1">${member.name}</h3>
+                            <p class="text-blue-600 font-light mb-3">${member.title}</p>
+                            <div class="flex-1 mb-4">
+                                <p class="text-sm font-medium text-slate-700 mb-2">Research Focus:</p>
+                                <p class="text-slate-600 leading-relaxed text-sm">${member.research_focus}</p>
+                            </div>
+                            ${member.bio ? `<p class="text-xs text-slate-500 mb-4 leading-relaxed">${member.bio}</p>` : ''}
+                            <div class="flex justify-center gap-3 mt-auto">
+                                ${member.email ? `<a href="mailto:${member.email}" class="p-2 text-slate-400 hover:text-blue-600 transition-colors duration-200" aria-label="${member.name}'s Email"><i class="fas fa-envelope w-4 h-4"></i></a>` : ''}
+                                ${member.linkedin_url ? `<a href="${member.linkedin_url}" target="_blank" rel="noopener noreferrer" class="p-2 text-slate-400 hover:text-blue-600 transition-colors duration-200" aria-label="${member.name}'s LinkedIn"><i class="fab fa-linkedin w-4 h-4"></i></a>` : ''}
+                                ${member.google_scholar_url ? `<a href="${member.google_scholar_url}" target="_blank" rel="noopener noreferrer" class="p-2 text-slate-400 hover:text-blue-600 transition-colors duration-200" aria-label="${member.name}'s Google Scholar"><i class="fas fa-graduation-cap w-4 h-4"></i></a>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Call the function when the page loads
+        window.addEventListener('DOMContentLoaded', renderTeamMembers);
     </script>
 </body>
 </html>
