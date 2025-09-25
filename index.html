@@ -93,6 +93,56 @@
         </div>
     </section>
 
+    <section id="publications" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 animate-fade-in">
+                <h2 class="text-4xl md:text-5xl font-light text-slate-900 mb-6">
+                    Publications & Patents
+                </h2>
+                <p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+                    Our research contributions span top-tier conferences, journals, and patent applications,
+                    advancing the state of the art in computational intelligence.
+                </p>
+            </div>
+
+            <!-- Filters -->
+            <div class="mb-8 space-y-4">
+                <div class="flex flex-col md:flex-row gap-4">
+                    <div class="relative flex-1">
+                        <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400"></i>
+                        <input
+                            type="text"
+                            placeholder="Search publications, authors, or abstracts..."
+                            id="searchInput"
+                            class="w-full pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-md focus:outline-none focus:border-blue-500"
+                        />
+                    </div>
+                    <div class="flex gap-2">
+                        <select id="typeFilter" class="w-40 bg-white border border-slate-200 rounded-md px-3 py-2 focus:outline-none focus:border-blue-500">
+                            <option value="all">All Types</option>
+                            <option value="paper">Papers</option>
+                            <option value="patent">Patents</option>
+                            <option value="conference">Conference</option>
+                            <option value="journal">Journal</option>
+                        </select>
+                        <select id="yearFilter" class="w-32 bg-white border border-slate-200 rounded-md px-3 py-2 focus:outline-none focus:border-blue-500">
+                            <option value="all">All Years</option>
+                            <!-- Years will be inserted here by JavaScript -->
+                        </select>
+                    </div>
+                </div>
+                <div id="publicationCount" class="text-sm text-slate-500">
+                    Showing 0 of 0 publications
+                </div>
+            </div>
+
+            <!-- Publications Grid -->
+            <div id="publicationsGrid" class="grid gap-6">
+                <!-- Publications will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
     <script>
         function scrollToSection(id) {
             document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
@@ -159,6 +209,164 @@
 
         // Call the function when the page loads
         window.addEventListener('DOMContentLoaded', renderTeamMembers);
+    </script>
+
+    <script>
+        // Sample publications data (replace with your actual data)
+        const publications = [
+            {
+                id: 1,
+                title: "A Novel Approach to Neural Network Training",
+                authors: "Jane Smith, John Doe, Alice Johnson",
+                year: 2023,
+                publication_type: "paper",
+                journal: "Journal of Artificial Intelligence Research",
+                abstract: "This paper introduces a new method for training neural networks with improved convergence and accuracy.",
+                doi: "https://doi.org/10.1234/jair.2023.1"
+            },
+            {
+                id: 2,
+                title: "Autonomous Robot Navigation Using Reinforcement Learning",
+                authors: "John Doe, Bob Brown, Carol Davis",
+                year: 2022,
+                publication_type: "conference",
+                conference: "International Conference on Robotics and Automation",
+                abstract: "We present a reinforcement learning framework for autonomous robot navigation in dynamic environments.",
+                pdf: "https://example.com/papers/robot_navigation.pdf"
+            },
+            {
+                id: 3,
+                title: "Method and System for Efficient Data Processing",
+                authors: "Alice Johnson, Jane Smith, David Wilson",
+                year: 2023,
+                publication_type: "patent",
+                patent_number: "US 12345678",
+                abstract: "A system for processing large datasets with minimal computational overhead.",
+                link: "https://patents.google.com/patent/US12345678"
+            },
+            {
+                id: 4,
+                title: "Deep Learning for Medical Image Analysis",
+                authors: "Carol Davis, David Wilson, Eve Taylor",
+                year: 2021,
+                publication_type: "journal",
+                journal: "Medical Image Analysis",
+                abstract: "This work applies deep learning techniques to improve the accuracy of medical image diagnosis.",
+                doi: "https://doi.org/10.5678/medimg.2021.4"
+            },
+            // Add more publications as needed
+        ];
+
+        // Function to get unique years from publications
+        function getUniqueYears() {
+            const years = [...new Set(publications.map(pub => pub.year))].sort((a, b) => b - a);
+            return years;
+        }
+
+        // Function to get the icon for a publication type
+        function getTypeIcon(type) {
+            switch (type) {
+                case 'paper': return '<i class="fas fa-file-alt"></i>';
+                case 'patent': return '<i class="fas fa-file-contract"></i>';
+                case 'conference': return '<i class="fas fa-users"></i>';
+                case 'journal': return '<i class="fas fa-book"></i>';
+                default: return '<i class="fas fa-file-alt"></i>';
+            }
+        }
+
+        // Function to get the color class for a publication type
+        function getTypeColor(type) {
+            switch (type) {
+                case 'paper': return 'bg-blue-100 text-blue-700';
+                case 'patent': return 'bg-emerald-100 text-emerald-700';
+                case 'conference': return 'bg-purple-100 text-purple-700';
+                case 'journal': return 'bg-orange-100 text-orange-700';
+                default: return 'bg-gray-100 text-gray-700';
+            }
+        }
+
+        // Function to render publications
+        function renderPublications() {
+            const grid = document.getElementById('publicationsGrid');
+            const searchQuery = document.getElementById('searchInput').value.toLowerCase();
+            const selectedType = document.getElementById('typeFilter').value;
+            const selectedYear = document.getElementById('yearFilter').value;
+
+            let filtered = publications;
+
+            // Apply search filter
+            if (searchQuery) {
+                filtered = filtered.filter(pub =>
+                    pub.title.toLowerCase().includes(searchQuery) ||
+                    pub.authors.toLowerCase().includes(searchQuery) ||
+                    (pub.abstract && pub.abstract.toLowerCase().includes(searchQuery))
+                );
+            }
+
+            // Apply type filter
+            if (selectedType !== 'all') {
+                filtered = filtered.filter(pub => pub.publication_type === selectedType);
+            }
+
+            // Apply year filter
+            if (selectedYear !== 'all') {
+                filtered = filtered.filter(pub => pub.year.toString() === selectedYear);
+            }
+
+            // Update publication count
+            document.getElementById('publicationCount').textContent =
+                `Showing ${filtered.length} of ${publications.length} publications`;
+
+            // Render filtered publications
+            grid.innerHTML = filtered.map(pub => `
+                <div class="publication-card bg-white rounded-lg overflow-hidden shadow-sm animate-fade-in">
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="${getTypeColor(pub.publication_type)} px-2 py-1 rounded-full text-xs font-medium">
+                                ${getTypeIcon(pub.publication_type)} ${pub.publication_type}
+                            </span>
+                            <span class="text-sm text-slate-500">${pub.year}</span>
+                        </div>
+                        <h3 class="text-xl font-medium text-slate-900 mb-2">${pub.title}</h3>
+                        <p class="text-sm text-slate-600 mb-3">${pub.authors}</p>
+                        <p class="text-sm text-slate-500 mb-4">
+                            ${pub.journal ? `Published in: ${pub.journal}` : ''}
+                            ${pub.conference ? `Presented at: ${pub.conference}` : ''}
+                            ${pub.patent_number ? `Patent: ${pub.patent_number}` : ''}
+                        </p>
+                        <p class="text-sm text-slate-600 mb-4">${pub.abstract}</p>
+                        <div class="flex gap-3">
+                            ${pub.doi ? `<a href="${pub.doi}" target="_blank" class="text-blue-600 hover:text-blue-800 text-sm flex items-center gap-1"><i class="fas fa-external-link-alt"></i> DOI</a>` : ''}
+                            ${pub.pdf ? `<a href="${pub.pdf}" target="_blank" class="text-blue-600 hover:text-blue-800 text-sm flex items-center gap-1"><i class="fas fa-file-pdf"></i> PDF</a>` : ''}
+                            ${pub.link ? `<a href="${pub.link}" target="_blank" class="text-blue-600 hover:text-blue-800 text-sm flex items-center gap-1"><i class="fas fa-external-link-alt"></i> Link</a>` : ''}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Function to populate year filter
+        function populateYearFilter() {
+            const yearFilter = document.getElementById('yearFilter');
+            const years = getUniqueYears();
+            years.forEach(year => {
+                const option = document.createElement('option');
+                option.value = year;
+                option.textContent = year;
+                yearFilter.appendChild(option);
+            });
+        }
+
+        // Event listeners for filters
+        document.getElementById('searchInput').addEventListener('input', renderPublications);
+        document.getElementById('typeFilter').addEventListener('change', renderPublications);
+        document.getElementById('yearFilter').addEventListener('change', renderPublications);
+
+        // Initialize the page
+        window.addEventListener('DOMContentLoaded', () => {
+            populateYearFilter();
+            renderPublications();
+        });
     </script>
 </body>
 </html>
