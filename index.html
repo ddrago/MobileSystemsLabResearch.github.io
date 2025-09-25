@@ -1,16 +1,62 @@
-import React from "react";
-import HeroSection from "../components/hero/HeroSection";
-import TeamSection from "../components/team/TeamSection";
-import PublicationsSection from "../components/publications/PublicationsSection";
-import Footer from "../components/footer/Footer";
-
-export default function Research() {
-    return (
-        <div className="min-h-screen bg-white">
-            <HeroSection />
-            <TeamSection />
-            <PublicationsSection />
-            <Footer />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Group | Academic Excellence</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Research Group</h1>
+            <p>Advancing knowledge through innovation and collaboration.</p>
         </div>
-    );
-}
+    </section>
+
+    <!-- Project Overview -->
+    <section class="overview">
+        <h2>Project Overview</h2>
+        <p>Our mission is to explore cutting-edge research in [your field]. We aim to [describe goals].</p>
+    </section>
+
+    <!-- Team Members -->
+    <section class="team">
+        <h2>Team Members</h2>
+        <div class="team-grid">
+            <div class="member">
+                <img src="assets/team-photos/member1.jpg" alt="Team Member 1">
+                <h3>Dr. Jane Smith</h3>
+                <p>Research Focus: [Area of expertise]</p>
+            </div>
+            <!-- Add more team members as needed -->
+        </div>
+    </section>
+
+    <!-- Publications -->
+    <section class="publications">
+        <h2>Publications</h2>
+        <div class="publication-filter">
+            <input type="text" placeholder="Search publications...">
+        </div>
+        <div class="publication-list">
+            <!-- Publications will be loaded dynamically or statically here -->
+            <div class="publication">
+                <h3>Paper Title</h3>
+                <p>Authors: [Authors]</p>
+                <p>Published in: [Journal/Conference]</p>
+            </div>
+            <!-- Add more publications as needed -->
+        </div>
+    </section>
+
+    <!-- Contact Footer -->
+    <footer class="contact">
+        <h2>Contact Us</h2>
+        <p>Email: research@university.edu</p>
+        <p>Address: [Your Address]</p>
+    </footer>
+</body>
+</html>
