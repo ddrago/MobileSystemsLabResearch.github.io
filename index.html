@@ -3,60 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Research Group | Academic Excellence</title>
-    <link rel="stylesheet" href="styles/main.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+    <title>Research Lab</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .animate-bounce-slow {
+            animation: bounce 3s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
 </head>
 <body>
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Research Group</h1>
-            <p>Advancing knowledge through innovation and collaboration.</p>
-        </div>
-    </section>
+    <section class="min-h-screen flex items-center justify-center bg-gradient-to-b from-slate-50 to-white relative">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <div class="opacity-100 translate-y-0 transition-all duration-800">
+                <h1 class="text-5xl md:text-7xl font-light text-slate-900 mb-6 tracking-tight">
+                    Computational Intelligence
+                    <span class="block text-4xl md:text-5xl text-blue-600 font-normal mt-2">
+                        Research Lab
+                    </span>
+                </h1>
 
-    <!-- Project Overview -->
-    <section class="overview">
-        <h2>Project Overview</h2>
-        <p>Our mission is to explore cutting-edge research in [your field]. We aim to [describe goals].</p>
-    </section>
+                <p class="text-xl md:text-2xl text-slate-600 mb-8 max-w-4xl mx-auto leading-relaxed font-light">
+                    Advancing the frontiers of artificial intelligence through innovative algorithms,
+                    machine learning methodologies, and computational frameworks that solve real-world challenges.
+                </p>
 
-    <!-- Team Members -->
-    <section class="team">
-        <h2>Team Members</h2>
-        <div class="team-grid">
-            <div class="member">
-                <img src="assets/team-photos/member1.jpg" alt="Team Member 1">
-                <h3>Dr. Jane Smith</h3>
-                <p>Research Focus: [Area of expertise]</p>
+                <div class="flex flex-col md:flex-row gap-6 justify-center items-center mb-12">
+                    <div class="flex items-center gap-3 text-slate-700">
+                        <i class="fas fa-users text-blue-600 w-5 h-5"></i>
+                        <span class="text-lg">12+ Researchers</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-slate-700">
+                        <i class="fas fa-book-open text-blue-600 w-5 h-5"></i>
+                        <span class="text-lg">50+ Publications</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-slate-700">
+                        <i class="fas fa-award text-blue-600 w-5 h-5"></i>
+                        <span class="text-lg">8 Patents</span>
+                    </div>
+                </div>
+
+                <div class="max-w-3xl mx-auto opacity-100 transition-all duration-600 delay-200">
+                    <h2 class="text-2xl font-light text-slate-800 mb-4">Our Mission</h2>
+                    <p class="text-lg text-slate-600 leading-relaxed">
+                        We develop cutting-edge computational intelligence solutions that bridge theoretical
+                        foundations with practical applications. Our research spans neural networks,
+                        evolutionary algorithms, and autonomous systems, with applications in healthcare,
+                        robotics, and sustainable technology.
+                    </p>
+                </div>
             </div>
-            <!-- Add more team members as needed -->
         </div>
+
+        <button onclick="scrollToSection('team')"
+            class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-slate-400 hover:text-blue-600 transition-colors duration-300 animate-bounce-slow">
+            <i class="fas fa-chevron-down w-8 h-8"></i>
+        </button>
     </section>
 
-    <!-- Publications -->
-    <section class="publications">
-        <h2>Publications</h2>
-        <div class="publication-filter">
-            <input type="text" placeholder="Search publications...">
-        </div>
-        <div class="publication-list">
-            <!-- Publications will be loaded dynamically or statically here -->
-            <div class="publication">
-                <h3>Paper Title</h3>
-                <p>Authors: [Authors]</p>
-                <p>Published in: [Journal/Conference]</p>
-            </div>
-            <!-- Add more publications as needed -->
-        </div>
+    <section id="team" class="min-h-screen bg-white py-12">
+        <!-- Team content here -->
     </section>
 
-    <!-- Contact Footer -->
-    <footer class="contact">
-        <h2>Contact Us</h2>
-        <p>Email: research@university.edu</p>
-        <p>Address: [Your Address]</p>
-    </footer>
+    <script>
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
 </body>
 </html>
